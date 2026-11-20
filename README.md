@@ -1,12 +1,9 @@
 # Concurrent Communication and Composable Security
 
-When a participant asks for the next reply in a protocol, has the ideal resource already disclosed enough for a simulator to produce it? These exploratory notes use category theory and concurrent games to study that question for multiparty communication.
+These research notes develop a game semantics for multiparty communication protocols and build cryptographic extensions on that foundation. The semantics is non-probabilistic. It describes which interactions can occur, how events depend on one another, and what participants can observe.
 
-The model records which events a reply depends on. Scott-open predicates on a coalition’s visible history describe what it can establish from finite evidence. In this symbolic model, security requires one simulator to reproduce the real protocol’s observable behaviour using the ideal interface. Simulators compose when protocols run in sequence or in parallel, including when an attacker interacts with both parallel components.
+Protocols are strategies on polarized event structures. Connecting two protocols matches events at their shared ports and hides the internal exchange. The distinction between a message and its transmission matters. If two sends carry the same payload, a protocol history can still record which send supplied a particular delivery. Scott-open predicates express observations supported by finite evidence, and discrete payloads recover ordinary messages and words.
 
-## Where to start
+The cryptographic extension uses the same interfaces to describe public information and private distinctions. A coalition’s view determines which assertions it can establish and which internal histories it cannot distinguish. Correctness and security give factorizations in opposite directions over the honest interface, with simulators that compose sequentially and in parallel.
 
-- **Section 4.2** develops streams of observable payloads and recovers finite words over a discrete alphabet.
-- **Section 6** describes correctness and security as factorizations in opposite directions over the honest interface. Theorem 6.51 characterizes when a deterministic service’s future reply behaviour can be recovered continuously from its initial public disclosure.
-- **Theorem B.44** gives a worked example. A simulator answers share requests before it learns the secret. At the threshold it learns the secret and interpolates a polynomial consistent with every share it has already issued.
-
+Sections 2–5 develop the game semantics, communication, distributed control, and execution. Sections 6–8 cover cryptography, protocol evidence and policy, and finite verification. Worked examples include FIFO and lossy channels in Appendix A, and authenticated channels and threshold disclosure in Appendix B.
